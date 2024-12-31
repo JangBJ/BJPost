@@ -1,6 +1,10 @@
 package com.bjpost.entity;
 
+import com.bjpost.BaseEntity;
 import com.bjpost.dto.request.PostCreateRequestDto;
+import com.bjpost.dto.request.PostUpdateRequestDto;
+import com.bjpost.dto.response.PostResponseDto;
+import com.bjpost.repository.PostRepository;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post {
+public class Post extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +38,12 @@ public class Post {
         this.title = title;
         this.content = content;
     }
+
+    // 변경을 위한 update()
+    public void update(PostUpdateRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+    }
+
+
 }

@@ -20,23 +20,16 @@ public class PostController {
 
     // 게시글 등록
     @PostMapping(value = "/post", produces = MediaType.APPLICATION_JSON_VALUE)
-    public PostResponseDto createPost(@RequestBody PostCreateRequestDto requestDto) {
-        postService.createPost(requestDto);
-
-        return PostResponseDto.builder()
-                .title(requestDto.getTitle())
-                .content(requestDto.getContent())
-                .build();
+    public Post createPost(@RequestBody PostCreateRequestDto requestDto) {
+        Post post = postService.createPost(requestDto);
+        // Post id를 얻기위해 PostResponse에서 Post로 반환값 바꿈
+        return post;
     }
 
     // 게시글 1개 조회
     @GetMapping("/post/{postId}")
-    public Post getPost(Long postId){
-        PostResponseDto responseDto = postService.getPost(postId);
-        return Post.builder()
-                .title(responseDto.getTitle())
-                .content(responseDto.getContent())
-                .build();
+    public Post getPost(@PathVariable("postId") Long postId){
+        return postService.getPost(postId);
     }
 
     // 게시글 전체 조회
@@ -48,13 +41,13 @@ public class PostController {
 
     // 특정 게시글 수정 기능
     @PutMapping("/post/{postId}")
-    public void updatePost(Long id, @RequestBody PostUpdateRequestDto requestDto){
+    public void updatePost(@PathVariable("postId") Long id, @RequestBody PostUpdateRequestDto requestDto){
         postService.updatePost(id, requestDto);
     }
 
-    // 특정 게시글 수정 기능
+    // 특정 게시글 삭제 기능
     @DeleteMapping("post/{postId}")
-    public void deletePost(Long id){
+    public void deletePost(@PathVariable("postId") Long id){
         postService.deletePost(id);
     }
 }

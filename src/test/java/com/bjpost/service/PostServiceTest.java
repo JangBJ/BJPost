@@ -99,11 +99,11 @@ class PostServiceTest {
         createPosts();
 
         // when(함수 실행)
-        PostResponseDto responseDto = postService.getPost(1L);
+        Post post = postService.getPost(1L);
 
         // then(결과)
-        assertEquals("병중이의 글0", responseDto.getTitle());
-        assertEquals("병중이의 글내용0", responseDto.getContent());
+        assertEquals("병중이의 글0", post.getTitle());
+        assertEquals("병중이의 글내용0", post.getContent());
     }
 
     @Test
@@ -138,7 +138,7 @@ class PostServiceTest {
         log.info(" ",postId);
 
         // when(함수 실행)
-        PostResponseDto responseDto = postService.getPost(postId);
+        postService.getPost(postId);
 
         // then(결과)
         Optional<Post> post = postRepository.findById(1L);
