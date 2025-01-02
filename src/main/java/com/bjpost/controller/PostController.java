@@ -8,6 +8,7 @@ import com.bjpost.entity.Post;
 import com.bjpost.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class PostController {
 
     // 게시글 등록
     @PostMapping(value = "/post", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Post createPost(@RequestBody PostCreateRequestDto requestDto) {
+    public Post createPost(@RequestBody @Validated PostCreateRequestDto requestDto) {
         Post post = postService.createPost(requestDto);
         // Post id를 얻기위해 PostResponse에서 Post로 반환값 바꿈
         return post;
@@ -55,7 +56,7 @@ public class PostController {
 
     // 게시글 검색 기능
     @PostMapping("post/search")
-    public List<Post> searchPost(@RequestBody PostSearchRequestDto requestDto){
+    public List<Post> searchPost(@RequestBody @Validated PostSearchRequestDto requestDto){
         return postService.searchPost(requestDto);
     }
 
