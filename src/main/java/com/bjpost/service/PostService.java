@@ -29,16 +29,14 @@ public class PostService {
 
     // 글 1개 조회
     public Post getPost(Long postId){
-        Post post = postRepository.findById(postId).orElseThrow(
+        /*Post post = postRepository.findById(postId).orElseThrow(
                 () -> new IllegalStateException("Post not found")
-        );
-
-        return post;
+        );*/
+        return postRepository.findById(postId).orElseThrow( () -> new IllegalStateException("Post not found"));
     }
 
     // 글 전체 조회
     public List<Post> getAllPosts(){
-
         return postRepository.findAllOrderByIdDesc();
     }
 
@@ -50,6 +48,7 @@ public class PostService {
 
     // 특정 글 삭제
     public void deletePost(Long postId) {
+        postRepository.findById(postId).orElseThrow( () -> new IllegalStateException("Post not found"));
         postRepository.deleteById(postId);
     }
 
