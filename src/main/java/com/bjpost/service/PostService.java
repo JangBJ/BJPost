@@ -1,6 +1,7 @@
 package com.bjpost.service;
 
 import com.bjpost.dto.request.PostCreateRequestDto;
+import com.bjpost.dto.request.PostSearchRequestDto;
 import com.bjpost.dto.request.PostUpdateRequestDto;
 import com.bjpost.repository.PostRepository;
 import com.bjpost.entity.Post;
@@ -28,7 +29,6 @@ public class PostService {
 
     // 글 1개 조회
     public Post getPost(Long postId){
-
         Post post = postRepository.findById(postId).orElseThrow(
                 () -> new IllegalStateException("Post not found")
         );
@@ -54,7 +54,7 @@ public class PostService {
     }
 
     // 검색
-    public List<Post> searchPost(String searchText){
-        return postRepository.findByTitleLike(searchText);
+    public List<Post> searchPost(PostSearchRequestDto requestDto) {
+        return postRepository.findByTitleLike(requestDto.getSearchText());
     }
 }

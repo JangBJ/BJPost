@@ -1,6 +1,7 @@
 package com.bjpost.controller;
 
 import com.bjpost.dto.request.PostCreateRequestDto;
+import com.bjpost.dto.request.PostSearchRequestDto;
 import com.bjpost.dto.request.PostUpdateRequestDto;
 import com.bjpost.dto.response.PostResponseDto;
 import com.bjpost.entity.Post;
@@ -54,11 +55,12 @@ public class PostController {
 
     // 게시글 검색 기능
     @PostMapping("post/search")
-    public List<Post> searchPost(@RequestBody String searchText){
-        return postService.searchPost(searchText);
+    public List<Post> searchPost(@RequestBody PostSearchRequestDto requestDto){
+        return postService.searchPost(requestDto);
     }
 
     /*public List<Post> searchPost(@RequestBody Map<String, Object> searchText){
         return postService.searchPost(searchText.get("searchText").toString());
-    }*/
+    }
+    이거는 내가 Dto 만들지 않고 걍 Text로 줬을 때 사용했음*/
 }
