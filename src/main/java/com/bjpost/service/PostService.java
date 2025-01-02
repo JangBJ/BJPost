@@ -52,4 +52,9 @@ public class PostService {
     public void deletePost(Long postId) {
         postRepository.deleteById(postId);
     }
+
+    // 검색
+    public List<Post> searchPost(String searchText){
+        return postRepository.findByTitleLike(searchText);
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -50,4 +51,14 @@ public class PostController {
     public void deletePost(@PathVariable("postId") Long id){
         postService.deletePost(id);
     }
+
+    // 게시글 검색 기능
+    @PostMapping("post/search")
+    public List<Post> searchPost(@RequestBody String searchText){
+        return postService.searchPost(searchText);
+    }
+
+    /*public List<Post> searchPost(@RequestBody Map<String, Object> searchText){
+        return postService.searchPost(searchText.get("searchText").toString());
+    }*/
 }

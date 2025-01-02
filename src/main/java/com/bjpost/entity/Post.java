@@ -5,17 +5,12 @@ import com.bjpost.dto.request.PostCreateRequestDto;
 import com.bjpost.dto.request.PostUpdateRequestDto;
 import com.bjpost.dto.response.PostResponseDto;
 import com.bjpost.repository.PostRepository;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Getter
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends BaseEntity {
 
