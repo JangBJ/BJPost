@@ -3,8 +3,6 @@ package com.bjpost.entity;
 import com.bjpost.BaseEntity;
 import com.bjpost.dto.request.PostCreateRequestDto;
 import com.bjpost.dto.request.PostUpdateRequestDto;
-import com.bjpost.dto.response.PostResponseDto;
-import com.bjpost.repository.PostRepository;
 import jakarta.persistence.*;
 import lombok.*;
 

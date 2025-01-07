@@ -3,7 +3,6 @@ package com.bjpost.controller;
 import com.bjpost.dto.request.PostCreateRequestDto;
 import com.bjpost.dto.request.PostSearchRequestDto;
 import com.bjpost.dto.request.PostUpdateRequestDto;
-import com.bjpost.dto.response.PostResponseDto;
 import com.bjpost.entity.Post;
 import com.bjpost.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
