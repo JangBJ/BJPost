@@ -1,5 +1,6 @@
-name: bjpost
+name: bjpost    # 이 workflow의 이름
 
+# 트리거(언제 이 워크플로우가 실행될지 설정)
 on:
   push:
     branches:
@@ -8,7 +9,7 @@ on:
   workflow_dispatch: # (2) 수동 실행: main 브랜치 push외에도 수동으로 해당 스크립트를 실행가능하도록 한다.
 defaults:
   run:
-    working-directory: bjpost # 해당 디렉토리 하위에 gradlew가 존재하므로 시작 디렉토리를 조정한다.
+    working-directory: BJPost # 해당 디렉토리 하위에 gradlew가 존재하므로 시작 디렉토리를 조정한다.
 jobs:
   build:
     runs-on: ubuntu-latest # (3) Github Action 스크립트가 작동될 OS 환경 지정
@@ -37,6 +38,7 @@ jobs:
           format: YYYY-MM-DDTHH-mm-ss # (8) action은 기존의 Momentjs를 지원하므로 동일한 포맷을 사용함
           utcOffset: "+09:00"  # (9) UTC기준 +9시간이 한국시간 KST가 된다.
 
+      # 배포를 위해 필요한 파일들을 모아서 deploy 폴더에 넣고 그 폴더를 .zip파일로 압축함
       - name: Generate deployment package # (1)
         run: |
           mkdir -p deploy
@@ -46,6 +48,7 @@ jobs:
           cp -r .platform deploy/.platform
           cd deploy && zip -r deploy.zip .
 
+      # 앞에서 만든 deploy.zip 파일을 EB에 올림
       - name: Deploy to EB # (2)
         uses: einaregilsson/beanstalk-deploy@v14
         with:
