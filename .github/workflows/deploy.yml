@@ -8,7 +8,7 @@ on:
   workflow_dispatch: # (2) 수동 실행: main 브랜치 push외에도 수동으로 해당 스크립트를 실행가능하도록 한다.
 defaults:
   run:
-    working-directory: bjpost # 해당 디렉토리 하위에 gradlew가 존재하므로 시작 디렉토리를 조정한다.
+    working-directory: . # 해당 디렉토리 하위에 gradlew가 존재하므로 시작 디렉토리를 조정한다.
 jobs:
   build:
     runs-on: ubuntu-latest # (3) Github Action 스크립트가 작동될 OS 환경 지정
