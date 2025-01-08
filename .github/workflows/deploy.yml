@@ -6,7 +6,7 @@ on:
     branches:
       - main # (1) 트리거 브랜치 설정: 해당 브랜치에 push되면 스크립트 실행됨
     paths:
-      - 'BJPost/**' # 해당 디렉토리 하위에 gradlew가 존재하므로
+      - 'bjpost/**' # 해당 디렉토리 하위에 gradlew가 존재하므로
   workflow_dispatch: # (2) 수동 실행: main 브랜치 push외에도 수동으로 해당 스크립트를 실행가능하도록 한다.
 defaults:
   run:
