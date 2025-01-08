@@ -45,8 +45,7 @@ jobs:
           cp Procfile deploy/Procfile
           cp -r .ebextensions deploy/.ebextensions
           cp -r .platform deploy/.platform
-          cd deploy
-          zip -r ../deploy.zip . # deploy 폴더 내부 파일들을 deploy.zip으로 압축
+          cd deploy && zip -r deploy.zip .
 
       # 앞에서 만든 deploy.zip 파일을 EB에 올림
       - name: Deploy to EB # (2)
@@ -58,4 +57,4 @@ jobs:
           environment_name: Bjpost-application-env # Beanstalk에서 생성한 환경의 이름
           version_label: github-action-${{steps.current-time.outputs.formattedTime}}
           region: ap-northeast-2
-          deployment_package: bjpost/deploy/deploy.zip
+          deployment_package: deploy/deploy.zip
