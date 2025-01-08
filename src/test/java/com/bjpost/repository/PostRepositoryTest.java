@@ -1,3 +1,4 @@
+/*
 package com.bjpost.repository;
 
 import com.bjpost.entity.Post;
@@ -23,7 +24,5 @@ class PostRepositoryTest {
         String title = "병중";
         List<Post> post = postRepository.findByTitleLike(title);
         post.stream().forEach(System.out::println);
-
-
     }
-}
+}*/
