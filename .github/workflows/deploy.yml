@@ -40,7 +40,7 @@ jobs:
       # 배포를 위해 필요한 파일들을 모아서 deploy 폴더에 넣고 그 폴더를 .zip파일로 압축함
       - name: Generate deployment package # (1)
         run: |
-          mkdir -p deploy
+          mkdir -p bjpost/deploy
           cp build/libs/*.jar deploy/application.jar
           cp Procfile deploy/Procfile
           cp -r .ebextensions deploy/.ebextensions
