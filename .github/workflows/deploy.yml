@@ -1,4 +1,4 @@
-name: bjpost    # 이 workflow의 이름
+name: bjpost    # 이 workflow의 네임
 
 # 트리거(언제 이 워크플로우가 실행될지 설정)
 on:
