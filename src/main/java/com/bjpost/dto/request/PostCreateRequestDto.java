@@ -25,4 +25,5 @@ public class PostCreateRequestDto {
     private String content;
 
     private LocalDateTime createAt;
+
 }
