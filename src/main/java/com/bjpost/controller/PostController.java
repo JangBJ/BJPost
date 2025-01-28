@@ -28,7 +28,7 @@ public class PostController {
 
     // 게시글 1개 조회
     @GetMapping("/post/{postId}")
-    public PostResponseDto getPost(@PathVariable("postId") Long postId){
+    public PostResponseDto getPost(@PathVariable Long postId){
         return postService.getPost(postId);
     }
 
@@ -40,7 +40,7 @@ public class PostController {
 
     // 특정 게시글 수정 기능
     @PutMapping("/post/{postId}")
-    public void updatePost(@PathVariable("postId") Long id, @RequestBody PostUpdateRequestDto requestDto){
+    public void updatePost(@PathVariable("postId") Long id, @RequestBody @Validated PostUpdateRequestDto requestDto){
         postService.updatePost(id, requestDto);
     }
 
@@ -52,7 +52,7 @@ public class PostController {
 
     // 게시글 검색 기능
     @PostMapping("post/search")
-    public List<Post> searchPost(@RequestBody @Validated PostSearchRequestDto requestDto){
+    public List<PostResponseDto> searchPost(@RequestParam @Validated PostSearchRequestDto requestDto){
         return postService.searchPost(requestDto);
     }
 

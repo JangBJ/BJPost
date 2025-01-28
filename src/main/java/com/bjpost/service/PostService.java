@@ -20,7 +20,7 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    // 게시글 등록(성공)
+    // 게시글 등록
     public PostResponseDto createPost(PostCreateRequestDto requestDto) {
         Post post = new Post(requestDto);
         postRepository.save(post);
@@ -30,7 +30,8 @@ public class PostService {
 
     // 글 1개 조회
     public PostResponseDto getPost(Long postId){
-        Post post = postRepository.findById(postId).orElseThrow( () -> new IllegalStateException("Post not found"));
+
+        Post post = postRepository.findById(postId).orElseThrow( () -> new IllegalArgumentException("Post not found"));
 
         return PostResponseDto.fromPost(post);
     }
@@ -57,7 +58,12 @@ public class PostService {
     }
 
     // 검색
-    public List<Post> searchPost(PostSearchRequestDto requestDto) {
-        return postRepository.findTop100ByTitleLike(requestDto.getSearchText());
+    public List<PostResponseDto> searchPost(PostSearchRequestDto requestDto) {
+
+        List<Post> posts = postRepository.findTop100ByTitleLike(requestDto.getSearchText());
+
+        List<PostResponseDto> responseList = posts.stream().map(PostResponseDto::fromPost).collect(Collectors.toList());
+
+        return responseList;
     }
 }
