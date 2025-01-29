@@ -1,10 +1,12 @@
 package com.bjpost.service;
 
 import com.bjpost.dto.request.PostCreateRequestDto;
+import com.bjpost.dto.request.PostUpdateRequestDto;
 import com.bjpost.dto.response.PostResponseDto;
 import com.bjpost.entity.Post;
 import com.bjpost.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -78,5 +80,24 @@ class PostServiceTest {
         assertEquals(2L, response.getId());
         assertEquals("병중이의 글 제목2", response.getTitle());
         assertEquals("병중이의 글 내용2", response.getContent());
+    }
+
+    @Test
+    @DisplayName("글 수정 테스트")
+    void test3() {
+        createPosts();
+
+        PostUpdateRequestDto request = PostUpdateRequestDto.builder()
+                .title("변경된 제목")
+                .content("변경된 내용")
+                .build();
+
+        //
+        postService.updatePost(2L, request);
+        Post post = postRepository.findById(2L).orElseThrow(() -> new IllegalArgumentException("글 없어용ㅠ"));
+
+
+        assertEquals("변경된 제목", post.getTitle());
+        assertEquals("변경된 내용", post.getContent());
     }
 }
