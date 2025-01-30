@@ -6,7 +6,6 @@ import com.bjpost.dto.response.PostResponseDto;
 import com.bjpost.entity.Post;
 import com.bjpost.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -70,16 +69,18 @@ class PostServiceTest {
     @Test
     @DisplayName("글 조회 테스트")
     void test2(){
-
         createPosts();
 
-        // 해당 서비스 테스트하기
-        PostResponseDto response = postService.getPost(2L);
+        // 실제로 생성된 게시글의 ID를 가져옵니다.
+        Post createdPost = postRepository.findAll().get(1);
+        Long postId = createdPost.getId();
 
-        // 글 제목 글 내용 확인하기
-        assertEquals(2L, response.getId());
-        assertEquals("병중이의 글 제목2", response.getTitle());
-        assertEquals("병중이의 글 내용2", response.getContent());
+        PostResponseDto response = postService.getPost(postId);
+
+        // 글 제목, 내용 확인
+        assertEquals(postId, response.getId());
+        assertEquals("병중이의 글 제목" + 2, response.getTitle());
+        assertEquals("병중이의 글 내용" + 2, response.getContent());
     }
 
     @Test
@@ -92,9 +93,12 @@ class PostServiceTest {
                 .content("변경된 내용")
                 .build();
 
-        //
-        postService.updatePost(2L, request);
-        Post post = postRepository.findById(2L).orElseThrow(() -> new IllegalArgumentException("글 없어용ㅠ"));
+        Post createPost= postRepository.findAll().get(1);
+        Long postId = createPost.getId();
+
+
+        postService.updatePost(postId, request);
+        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("글 없어용ㅠ"));
 
 
         assertEquals("변경된 제목", post.getTitle());
@@ -106,7 +110,10 @@ class PostServiceTest {
     void test4(){
         createPosts();
 
-        postService.deletePost(1L);
+        Post createPost = postRepository.findAll().get(1);
+        Long postId = createPost.getId();
+
+        postService.deletePost(postId);
 
         assertEquals( 29L, postRepository.findAll().size());
     }
