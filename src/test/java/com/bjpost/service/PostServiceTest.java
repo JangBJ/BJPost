@@ -100,4 +100,14 @@ class PostServiceTest {
         assertEquals("변경된 제목", post.getTitle());
         assertEquals("변경된 내용", post.getContent());
     }
+
+    @Test
+    @DisplayName("글 삭제 테스트")
+    void test4(){
+        createPosts();
+
+        postService.deletePost(1L);
+
+        assertEquals( 29L, postRepository.findAll().size());
+    }
 }
