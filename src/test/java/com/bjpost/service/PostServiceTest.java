@@ -106,7 +106,7 @@ class PostServiceTest {
     }
 
     @Test
-    @DisplayName("글 삭제 테스트")
+    @DisplayName("글 삭제 테스트입니다")
     void test4(){
         createPosts();
 
