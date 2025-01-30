@@ -38,6 +38,7 @@ public class PostService {
 
     // 글 전체 조회
     public List<PostResponseDto> getAllPosts(){
+
         List<Post> posts = postRepository.findTop10ByOrderByIdDesc();
 
         return posts.stream()

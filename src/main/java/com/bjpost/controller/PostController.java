@@ -7,6 +7,7 @@ import com.bjpost.dto.response.PostResponseDto;
 import com.bjpost.entity.Post;
 import com.bjpost.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class PostController {
     private PostService postService;
 
     // 게시글 등록
+    @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "/post", produces = MediaType.APPLICATION_JSON_VALUE)
     public PostResponseDto createPost(@RequestBody @Validated PostCreateRequestDto requestDto) {
         return postService.createPost(requestDto);
@@ -52,7 +54,7 @@ public class PostController {
 
     // 게시글 검색 기능
     @PostMapping("post/search")
-    public List<PostResponseDto> searchPost(@RequestParam @Validated PostSearchRequestDto requestDto){
+    public List<PostResponseDto> searchPost(@RequestBody @Validated PostSearchRequestDto requestDto){
         return postService.searchPost(requestDto);
     }
 
