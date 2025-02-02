@@ -21,6 +21,11 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
+
     // 게시글 등록
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(value = "/post", produces = MediaType.APPLICATION_JSON_VALUE)
